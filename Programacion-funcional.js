@@ -231,3 +231,39 @@ Array.prototype.myFilter = function(callback){
 console.log(["naomi", "quincy", "camperbot"].myFilter(element => element === "naomi"))
 console.log([23, 65, 98, 5, 13].myFilter(item => item % 2))
 console.log([1, 1, 2, 5, 2].myFilter((element, index, array) => array.indexOf(element) === index))
+
+/*
+
+La variable watchList contiene un arreglo de objetos con información sobre varias películas. Utiliza reduce para encontrar la calificación media en IMDB de las películas dirigidas por Christopher Nolan. Recuerda de desafíos anteriores filtrar (filter) los datos y mapear (map) sobre ellos para extraer lo que necesitas. Puede que necesites crear otras variables y devolver la calificación media con la función getRating. Ten en cuenta que los valores de calificación se guardan como cadenas en el objeto y necesitan ser convertidos en números antes de ser utilizados en cualquier operación matemática.
+
+*/
+function getRating(watchList){
+    let movies = watchList.map((obj) => {
+        return {'title': obj.Title, 'director': obj.Director, 'imdbRating': parseFloat(obj.imdbRating)}
+    })
+    // return movies;
+    let christopherNolanMovies = movies.filter( (obj) => obj.director === 'Christopher Nolan')
+    let promedioIMDBRating = christopherNolanMovies.reduce((sum, obj) => sum + obj.imdbRating, 0)
+    // return typeof christopherNolanMovies[0].imdbRating;
+    return promedioIMDBRating / christopherNolanMovies.length;
+}
+
+console.log(getRating(watchList))
+
+/*
+
+Completa el código para la función squareList usando cualquier combinación de map(), filter(), y reduce(). La función debe devolver un nuevo arreglo que contenga los cuadrados de solamente los enteros positivos (números decimales no son enteros) cuando se le pasa un arreglo de números reales. Un ejemplo de un arreglo que contiene números reales es [-3, 4.8, 5, 3, -3.2].
+
+Nota: Tu función no debe usar ningún tipo de bucle for o while o la función forEach().
+
+*/
+const squareList = (array) => {
+    let numEnteroFilter = array.filter((valor) => Number.isInteger(valor) && valor > 0);
+    // return numEnteroFilter;
+    let valoresAlCuadrado = numEnteroFilter.map((valor) => valor ** 2);
+    return valoresAlCuadrado;
+}
+
+console.log(squareList([-3, 4.8, 5, 3, -3.2]))
+console.log(squareList([4, 5.6, -9.8, 3.14, 42, 6, 8.34, -2]))
+console.log(squareList([-3.7, -5, 3, 10, 12.5, 7, -4.5, -17, 0.3]))
