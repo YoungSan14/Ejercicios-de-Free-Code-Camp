@@ -267,3 +267,63 @@ const squareList = (array) => {
 console.log(squareList([-3, 4.8, 5, 3, -3.2]))
 console.log(squareList([4, 5.6, -9.8, 3.14, 42, 6, 8.34, -2]))
 console.log(squareList([-3.7, -5, 3, 10, 12.5, 7, -4.5, -17, 0.3]))
+
+/*
+
+Utiliza el método sort en la función alphabeticalOrder para ordenar los elementos de arr en orden alfabético. La función debe devolver el arreglo ordenado.
+
+*/
+function ordenAlfabetico(array){
+    return array.sort(function(a, b){
+        if(a === b){
+            return 0;
+        }else if( a > b){
+            return 1;
+        }else{
+            return -1;
+        }
+    })
+}
+
+console.log(ordenAlfabetico(["x", "h", "a", "m", "n", "m"]))
+console.log(ordenAlfabetico(["a", "d", "c", "a", "z", "g"]))
+console.log(ordenAlfabetico(["a", "a", "a", "a", "x", "t"]))
+
+/*
+Utiliza el método sort en la función nonMutatingSort para ordenar los elementos de un arreglo en orden ascendente. La función debe devolver un nuevo arreglo y no mutar la variable globalArray.
+*/
+const globalArray = [5, 6, 3, 2, 9];
+
+const nonMutatingSort = (array) => {
+    let newArray = [...array];
+    return newArray.sort((a, b) => a - b)
+}
+
+console.log(nonMutatingSort(globalArray))
+console.log(globalArray)
+console.log(nonMutatingSort([1, 30, 4, 21, 100000]))
+
+/*
+Utiliza el método split dentro de la función splitify para dividir str en un arreglo de palabras. La función debe devolver un arreglo. Ten en cuenta que las palabras no siempre están separadas por espacios y que el arreglo no debe contener signos de puntuación.
+*/
+const splitify = (string) => {
+    let strArray = string.split(/\W/);
+    return strArray;
+}
+
+console.log(splitify("Earth-is-our home"));
+console.log(splitify("This.is.a-sentence"));
+console.log(splitify("This.is.a-sentence"));
+
+/*
+Utiliza el método join (entre otros) dentro de la función sentensify para hacer una oración a partir de las palabras en la cadena str. La función debe devolver una cadena. Por ejemplo, I-like-Star-Wars se convertiría en I like Star Wars. Para este desafío, no utilices el método replace.
+*/
+const sentensify = (string) => {
+    let strArray = string.split(/\W/);
+    let str = strArray.join(' ');
+    return str;
+}
+
+console.log(sentensify('I-like-Star-Wars'))
+console.log(sentensify("May-the-force-be-with-you"))
+console.log(sentensify("Que.mira-bobo"))
