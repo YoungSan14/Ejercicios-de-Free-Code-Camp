@@ -327,3 +327,66 @@ const sentensify = (string) => {
 console.log(sentensify('I-like-Star-Wars'))
 console.log(sentensify("May-the-force-be-with-you"))
 console.log(sentensify("Que.mira-bobo"))
+
+/*
+Rellena la función urlSlug para convertir una cadena title y devolver la versión con guiones para la URL. Puedes utilizar cualquiera de los métodos vistos en esta sección y no utilices replace. Aquí están los requisitos:
+
+La entrada es una cadena con espacios y palabras, en mayúsculas y minúsculas
+El resultado es una cadena con los espacios entre palabras reemplazadas por un guion (-)
+El resultado debe contener todas las letras minúsculas
+El resultado no debe tener espacios
+*/
+const urlSlug = (string) => {
+    let strArray = string.trim().toLowerCase().split(/\s+/);
+    let strURL = strArray.join('-');
+    return strURL;
+}
+
+console.log(urlSlug("Winter Is Coming"));
+console.log(urlSlug(" Winter  Is  Coming"));
+console.log(urlSlug("A Mind Needs Books Like A Sword Needs A Whetstone"))
+console.log(urlSlug("Hold The Door"))
+
+/*
+Utiliza el método every dentro de la función checkPositive para comprobar si cada elemento en arr es positivo. La función debe devolver un valor booleano.
+*/
+const checkPositive = (array) => {
+    return array.every(function(valor){
+        return valor >= 0;
+    })
+}
+
+console.log(checkPositive([1, 2, 3, -4, 5]))
+console.log(checkPositive([1, 2, 3, 4, 5]))
+console.log(checkPositive([1, -2, 3, -4, 5]))
+
+/*
+Utiliza el método some dentro de la función checkPositive para comprobar si algún elemento en arr es positivo. La función debe devolver un valor booleano.
+*/
+const hayPositivos = (array) => {
+    return array.some((valor) => valor >= 0)
+}
+
+console.log(hayPositivos([-1, -2, -3, -4, -5]))
+console.log(hayPositivos([1, 2, 3, -4, 5]))
+console.log(hayPositivos([1, 2, 3, 4, 5]))
+
+/*
+Completa el cuerpo de la función add para que use currificación para añadir 
+parámetros x, y, y z.
+*/
+const add = (x) => (y) => (z) => {
+    return x + y + z;
+}
+function add2(x){
+    return function(y){
+        return function (z){
+            return x + y + z;
+        }
+    }
+}
+
+console.log(add(10)(20)(30))
+console.log(add(11)(22)(33))
+console.log(add2(10)(20)(30))
+console.log(add2(1)(2)(3))
