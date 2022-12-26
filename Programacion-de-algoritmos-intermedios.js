@@ -158,6 +158,71 @@ const myReplace = (string, str1, str2) => {
 }
 
 console.log(myReplace('anda paya Tonto', 'Tonto', 'bobo'));
-console.log(myReplace("Let us go to the store", "store", "mall"))
-console.log(myReplace("I think we should look up there", "up", "Down"))
-console.log(myReplace("Let us get back to more Coding", "Coding", "algorithms"))
+console.log(myReplace("Let us go to the store", "store", "mall"));
+console.log(myReplace("I think we should look up there", "up", "Down"));
+console.log(myReplace("Let us get back to more Coding", "Coding", "algorithms"));
+
+/*
+Emparejamiento de ADN
+El par de hebras del ADN esta formado por pares de nucleobases. Los pares de base son representados por los caracteres AT y CG, que forman bloques de doble hélix ADN.
+
+A la cadena de ADN le falta el elemento de emparejamiento. Escribe una función que coincida con los pares de base faltantes para la hebra de ADN proporcionada. Para cada carácter de la cadena proporcionada, encuentra el carácter de par base. Devuelve los resultados como un arreglo 2d.
+
+Por ejemplo, la entrada GCG, devuelve [["G", "C"], ["C","G"], ["G", "C"]]
+
+El carácter y su par se emparejan en un arreglo, y todos los arreglos se agrupan en un arreglo encapsulado.
+*/
+function pairElement(string){
+    let newArray = [];
+    for (let i = 0; i < string.length; i++){
+        let array = [];
+        array.push(string[i]);
+        if (string[i] === 'G'){
+            array.push('C');
+        }else if (string[i] === 'C'){
+            array.push('G');
+        }else if (string[i] === 'A'){
+            array.push('T');
+        }else if (string[i] === 'T'){
+            array.push('A');
+        }
+        newArray.push(array)
+    }
+    return newArray;
+}
+
+console.log(pairElement('GCG'))
+console.log(pairElement("CTCTA"))
+console.log(pairElement("TTGAG"))
+
+/*
+Letras faltantes
+Encuentra la letra que falta en la siguiente cadena de letras y devuélvela.
+
+Si todas las letras están presentes en la cadena, devuelve undefined.
+*/
+const fearNotLetter = (string => {
+    let arr = [];
+    for (let i = 0; i < string.length; i++){
+        let num = string.charCodeAt(i);
+        arr.push(num);
+    }
+    let letras = [];
+    for (let j = arr[0]; j <= arr[arr.length -1]; j++){
+        let str = String.fromCharCode(j)
+        letras.push(str);
+    }  
+    let strArray = string.split('');
+    let letraFaltante;
+    for (let z = 0; z < letras.length; z++){
+        if(strArray.indexOf(letras[z]) === -1){
+            letraFaltante = letras[z];
+        }
+    }
+    return letraFaltante;
+})
+
+console.log(fearNotLetter('abce'));
+console.log(fearNotLetter("stvwx"));
+console.log(fearNotLetter("bcdf"));
+console.log(fearNotLetter("abcdefghijklmnopqrstuvwxyz"));
