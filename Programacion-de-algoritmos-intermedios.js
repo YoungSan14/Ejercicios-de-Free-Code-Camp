@@ -102,7 +102,62 @@ const spinalCase = (string) => {
     return arrStr.join('-').toLowerCase();
 }
 
-console.log(spinalCase("This Is Spinal Tap"))
-console.log(spinalCase("The_Andy_Griffith_Show"))
-console.log(spinalCase("AllThe-small Things"))
-console.log(spinalCase("thisIsSpinalTap"))
+console.log(spinalCase("This Is Spinal Tap"));
+console.log(spinalCase("The_Andy_Griffith_Show"));
+console.log(spinalCase("AllThe-small Things"));
+console.log(spinalCase("thisIsSpinalTap"));
+
+/*
+Pig Latin (Latin de los cerdos)
+Pig Latin (latin de los cerdos) es una manera de alterar las palabras en inglés. Las normas son las siguientes:
+
+- Si una palabra comienza con una consonante, toma la primer consonante o grupo de consonantes, muévela al final de la palabra, y añade ay a ella.
+
+- Si una palabra comienza con una vocal, solo añade way al final.
+*/
+function translatePigLatin(string){
+    if (/[aeiou]/.test(string[0])){
+        let strVocal = string.split('');
+        strVocal.push('way');
+        return strVocal.join('');
+    }else{
+        let strCons = string.split(/(?=[aeiou])/)
+        let primerosCaracter = strCons[0];
+        strCons.push(primerosCaracter, 'ay')
+        strCons.shift();
+        return strCons.join('');
+    }
+}
+
+console.log(translatePigLatin("schwartz"))
+console.log(translatePigLatin("california"))
+console.log(translatePigLatin('alo'))
+console.log(translatePigLatin("algorithm"))
+console.log(translatePigLatin("rhythm"))
+
+/*
+Busca y reemplaza
+Realiza una búsqueda y reemplaza en la oración usando los argumentos proporcionados y devuelve la nueva oración.
+
+El primer argumento es la frase sobre la que se va a realizar la búsqueda y el reemplazo.
+
+El segundo argumento es la palabra que se reemplazará (antes).
+
+El tercer argumento es lo que reemplazará el segundo argumento (después).
+
+Note: Mantén la capitalización del primer carácter en la palabra original cuando lo estés reemplazando. Por ejemplo, si quieres reemplazar la palabra Book por la palabra dog, debe ser reemplazada como Dog
+*/
+const myReplace = (string, str1, str2) => {
+    if(/^[A-Z]/.test(str1)){
+        str2 = str2.charAt(0).toUpperCase() + str2.slice(1, str2.length);
+    }else{
+        str2 = str2.charAt(0).toLowerCase() + str2.slice(1, str2.length);
+    }
+    string = string.replace(str1, str2);
+    return string;
+}
+
+console.log(myReplace('anda paya Tonto', 'Tonto', 'bobo'));
+console.log(myReplace("Let us go to the store", "store", "mall"))
+console.log(myReplace("I think we should look up there", "up", "Down"))
+console.log(myReplace("Let us get back to more Coding", "Coding", "algorithms"))
