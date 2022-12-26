@@ -44,3 +44,65 @@ console.log(diferenciasArray([1, 2, 3, 5], [1, 2, 3, 4, 5]));
 console.log(diferenciasArray(["diorite", "andesite", "grass", "dirt", "pink wool", "dead shrub"], ["diorite", "andesite", "grass", "dirt", "dead shrub"]));
 console.log(diferenciasArray(["andesite", "grass", "dirt", "pink wool", "dead shrub"], ["diorite", "andesite", "grass", "dirt", "dead shrub"]));
 console.log(diferenciasArray([1, "calf", 3, "piglet"], [7, "filly"]));
+
+/*
+Busca y destruye
+Se proporcionará un arreglo inicial (el primer argumento en la función destroyer), seguido de uno o más argumentos. Elimina todos los elementos del arreglo inicial que tengan el mismo valor que estos argumentos.
+
+Nota: Tienes que utilizar el objeto arguments.
+*/
+function destroyer(array){
+    let arr = [...arguments];
+// se copian todos los argumentos en un array, para poder usar el metodo .filter(), ya que arguments es un "Objeto"
+    let destruir = arr.filter((valor) => typeof valor !== 'object')
+// 'destruir' es un array, que tendra los valores que NO son un objeto/array 
+    return arr[0].filter(function(valor){
+// se utiliza .filter() en el primer elemento de arr, ya que el primer argumento es un array
+        if(destruir.includes(valor) !== true){
+// si el array 'destruir' no contiene el valor de 'arr[0]', se retornara ese valor
+            return valor;
+        }
+    })
+}
+
+console.log(destroyer([1, 2, 3, 1, 2, 3], 2, 3));
+console.log(destroyer(["tree", "hamburger", 53], "tree", 53));
+console.log(destroyer(["possum", "trollo", 12, "safari", "hotdog", 92, 65, "grandma", "bugati", "trojan", "yacht"], "yacht", "possum", "trollo", "safari", "hotdog", "grandma", "bugati", "trojan"));
+
+/*
+Donde estás
+Crea una función que busque a través de un arreglo de objetos (primer argumento) y devuelva un arreglo de todos los objetos que tengan pares de nombre y valor coincidentes (segundo argumento). Cada par de nombre y valor del objeto fuente tiene que estar presente en el objeto de la colección si se va a incluir en el arreglo devuelto.
+
+Por ejemplo, si el primer argumento es [{ first: "Romeo", last: "Montague" }, { first: "Mercutio", last: null }, { first: "Tybalt", last: "Capulet" }], y el segundo argumento es { last: "Capulet" }, entonces debes devolver el tercer objeto del arreglo (el primer argumento), porque contiene el nombre y su valor, el cual fue pasado como segundo argumento.
+*/
+function whatIsInAName(collection, obj){
+    let newArray = collection.filter(function(objeto, i){
+        for (let key in obj){
+            if(obj[key] !== objeto[key]){
+                return false;
+            }
+        }
+        return true;
+    })
+    return newArray;
+}
+
+console.log(whatIsInAName([{ first: "Romeo", last: "Montague" }, { first: "Mercutio", last: null }, { first: "Tybalt", last: "Capulet" }], { last: "Capulet" }));
+console.log(whatIsInAName([{ "apple": 1 }, { "apple": 1 }, { "apple": 1, "bat": 2 }], { "apple": 1 }));
+console.log(whatIsInAName([{ "apple": 1, "bat": 2 }, { "bat": 2 }, { "apple": 1, "bat": 2, "cookie": 2 }], { "apple": 1, "bat": 2 }))
+console.log(whatIsInAName([{"a": 1, "b": 2, "c": 3, "d": 9999}], {"a": 1, "b": 9999, "c": 3}))
+
+/*
+Spinal case
+Convierte una cadena a spinal case. Spinal case significa todas-las-palabras-en-minúscula-unidas-por-guiones.
+*/
+const spinalCase = (string) => {
+    let arrStr = string.split(/\s|_|(?=[A-Z])/)
+// convierte en array el string, con una exprecion regular, a partir de un espacio(\s), si hay un _ o si despues del string hay una mayuscula (?=[A-Z]) 
+    return arrStr.join('-').toLowerCase();
+}
+
+console.log(spinalCase("This Is Spinal Tap"))
+console.log(spinalCase("The_Andy_Griffith_Show"))
+console.log(spinalCase("AllThe-small Things"))
+console.log(spinalCase("thisIsSpinalTap"))
