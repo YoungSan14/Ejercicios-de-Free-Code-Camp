@@ -226,3 +226,28 @@ console.log(fearNotLetter('abce'));
 console.log(fearNotLetter("stvwx"));
 console.log(fearNotLetter("bcdf"));
 console.log(fearNotLetter("abcdefghijklmnopqrstuvwxyz"));
+
+/*
+Unión ordenada
+Escribe una función que tome dos o más arreglos y devuelve un nuevo arreglo de valores únicos manteniendo el orden original de los arreglos proporcionados.
+
+En otras palabras, todos los valores presentes de todos los arreglos deben incluirse en su orden original, pero sin duplicados en el arreglo final.
+
+Los números únicos deben ser ordenados según su orden original, pero el arreglo final no debe ordenarse según el orden numérico.
+
+Revisa las pruebas de afirmación para ver ejemplos.
+*/
+function uniteUnique(array){
+    let newArray = [];
+    for (let valor in arguments){
+        for (let i = 0; i < arguments[valor].length; i++){
+            newArray.push(arguments[valor][i]);
+        }
+    }
+    let newSet = new Set(newArray);
+    newArray = [...newSet]
+    return newArray;
+}
+
+console.log(uniteUnique([1, 3, 2], [5, 2, 1, 4], [2, 1]))
+// console.log()
