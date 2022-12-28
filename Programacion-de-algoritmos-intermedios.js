@@ -249,5 +249,146 @@ function uniteUnique(array){
     return newArray;
 }
 
-console.log(uniteUnique([1, 3, 2], [5, 2, 1, 4], [2, 1]))
-// console.log()
+console.log(uniteUnique([1, 3, 2], [5, 2, 1, 4], [2, 1]));
+console.log(uniteUnique([1, 2, 3], [5, 2, 1, 4], [2, 1], [6, 7, 8]));
+console.log(uniteUnique([1, 3, 2, 3], [5, 2, 1, 4], [2, 1]));
+console.log(uniteUnique([1, 2, 3], [5, 2, 1]));
+
+/*
+Convierte entidades HTML
+Convierte los caracteres &, <, >, " (dobles comillas), y ' (apóstrofo), en un cadena con su correspondiente entidad HTML.
+    & = &amp;
+    < = &lt;
+    > = &gt;
+    " = &quot;
+    ' = &apos;
+*/
+const convertHTML = (string => {
+    let newArray = []
+    for (let i = 0; i < string.length; i++){
+        switch(string[i]){
+            case '&':
+                newArray.push('&amp;');
+                break;
+            case '<':
+                newArray.push('&lt;');
+                break;
+            case '>':
+                newArray.push('&gt;');
+                break;
+            case '"':
+                newArray.push('&quot;');
+                break;
+            case "'":
+                newArray.push('&apos;');
+                break;
+            default:
+                newArray.push(string[i]);
+            }
+    }
+    return newArray.join('');
+})
+
+console.log(convertHTML('Dolce & Gavana'))
+console.log(convertHTML("Hamburgers < Pizza < Tacos"));
+console.log(convertHTML('Stuff in "quotation marks"'));
+console.log(convertHTML("Schindler's List"));
+console.log(convertHTML("<>"));
+console.log(convertHTML("abc"));
+
+/*
+Suma todos los números impares de Fibonacci
+Dado un entero positivo num, devuelve la suma de todos los números impares de Fibonacci que son menores o iguales a num.
+
+Los dos primeros números en la secuencia de Fibonacci son 1 y 1. Cada número adicional en la secuencia es la suma de los dos números anteriores. Los seis primeros números de la secuencia de Fibonacci son 1, 1, 2, 3, 5 y 8.
+
+Por ejemplo, sumFibs(10) debe devolver 10 porque todos los números impares de Fibonacci menores o iguales a 10 son 1, 1, 3 y 5.
+*/
+const sumFibs = (num => {
+    if(num > 1){
+        let fibonacci = [1 ,1]; 
+        for (let i = 2; i <= num; i++){
+            fibonacci.push(fibonacci[i - 1] + fibonacci[i - 2]);
+        }
+        let impares = fibonacci.filter(n => n % 2 !== 0 && n <= num);
+        let sumaImpares = impares.reduce((acum, n) => acum + n);
+        return sumaImpares;
+        // let sumaImpares = 0;
+        // for (let i = 0; i < fibonacci.length; i++){
+        //     // Number.isInteger(fibonacci[i] / 2 ) == false
+        //     if(fibonacci[i] % 2 !== 0 && sumaImpares < num){
+        //         sumaImpares += fibonacci[i];
+        //     }
+        // }
+    }else{
+        return 1;
+    }
+})
+
+console.log(sumFibs(1));
+console.log(sumFibs(1000));
+console.log(sumFibs(4));
+console.log(sumFibs(10));
+console.log(sumFibs(75024));
+console.log(sumFibs(75025));
+//0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55
+
+/*
+Suma todos los números primos
+Un número primo es un número entero mayor que 1 con sólo dos divisores: 1 y el propio número. Por ejemplo, 2 es un número primo porque sólo es divisible entre 1 y 2. Por el contrario, 4 no es primo ya que es divisible entre 1, 2 y 4.
+
+Reescribe sumPrimes para que devuelva la suma de todos los números primos que sean menores o iguales a num.
+*/
+const sumPrimes = (num => {
+    let numPrimos = [];
+    for (let i = 2; i <= num; i++){
+        if(esPrimo(i)){
+            numPrimos.push(i);
+        }
+    }
+    console.log(numPrimos)
+    function esPrimo(numero){
+        for (let j = 2; j < numero; j++){
+            if(numero % j === 0){
+                return false;
+            }
+        }
+        return numero;
+    }     
+    return numPrimos.reduce((acum, n) => acum + n);
+})
+
+console.log(sumPrimes(10));
+console.log(sumPrimes(977));
+
+/*
+Mínimo común múltiplo
+Encuentra el múltiplo común más pequeño de los parámetros proporcionados que pueden dividirse equitativamente por ambos, así como por todos los números consecutivos del rango entre estos parámetros.
+
+El rango será un arreglo de dos números que no necesariamente estarán en orden numérico.
+
+Por ejemplo, si se dan 1 y 3, encuentra el múltiplo común más pequeño de 1 y 3 que también es dividido por todos los números entre 1 y 3. La respuesta sería 6.
+                        NO ME SALE :( */
+// function smallestCommons(array){
+//     array.sort()
+//     function restoCero(numero){
+//         for (let i = array[0]; i <= array[1]; i++){
+//             if(numero % i !== 0){
+//                 return false;
+//             }
+//         }
+//         return true;
+//     }
+//     let resultado = array[1];
+//     let i = array[1];
+    
+//     do{
+//         i = i + i;
+//         resultado *= i;
+//     }while(restoCero(resultado))
+
+//     return resultado;
+// }
+
+// console.log(smallestCommons([5, 1]))
+// console.log(smallestCommons([3, 1])) 
