@@ -465,3 +465,48 @@ En JavaScript, los valores truthy son valores que se traducen en true cuando se 
 
 Recuerda, puedes acceder a las propiedades del objeto mediante la notación de puntos o la notación de corchetes [].
 */
+function truthCheck(collection, prop){
+    return collection.every(obj => obj[prop])
+// El metodo .every() evaluara cada valor de la propiedad(prop) del objeto(obj) de la coleccion y retornara 'true' si esos valores de la propiedad no son falsos, es decir, valores false, 0, undefined, '', Null, NaN 
+}
+
+console.log(truthCheck([{name: "Quincy", role: "Founder", isBot: false}, {name: "Naomi", role: "", isBot: false}, {name: "Camperbot", role: "Bot", isBot: true}], "isBot"));
+console.log(truthCheck([{name: "Quincy", role: "Founder", isBot: false}, {name: "Naomi", role: "", isBot: false}, {name: "Camperbot", role: "Bot", isBot: true}], "role"));
+console.log(truthCheck([{name: "Pikachu", number: 25, caught: 3}, {name: "Togepi", number: 175, caught: 1}, {name: "MissingNo", number: NaN, caught: 0}], "number"))
+
+/*
+Argumentos opcionales
+Crea una función que sume dos argumentos. Si sólo se proporciona un argumento, entonces devuelve una función que espera un argumento y devuelve la suma.
+
+Por ejemplo, addTogether(2, 3) debe devolver 5 y addTogether(2) debe devolver una función.
+*/
+function addTogether(){
+    let argumentos = [...arguments];
+    let sonNumeros = argumentos.every(valor => typeof valor === 'number')
+    if(sonNumeros){  
+        function suma(){
+            return argumentos.reduce((acum, valor) => acum + valor, 0);
+        }
+        return suma();
+    }else{
+        return undefined;
+    }
+}
+
+console.log(addTogether(2, 3))
+// console.log(addTogether(2)(3))
+// console.log(addTogether(3)(3))
+
+/*
+Implementa una función recursiva factorial(n) que calcule el factorial de un número entero dado. El factorial de un número entero n es el producto de todos los números enteros desde 1 hasta n. Por ejemplo, el factorial de 5 es 5 * 4 * 3 * 2 * 1 = 120.
+*/
+function factorial(num){
+    if (num === 1){
+        return num;
+    }else{
+        console.log(num);
+        return num * factorial(num - 1); 
+    }
+}
+
+console.log(factorial(5));
